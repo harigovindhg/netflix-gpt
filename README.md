@@ -1,4 +1,5 @@
 ## Netflix GPT Project
+
 ### Features
 - Splash Screen Intro
 - Login/Sign Up Page
@@ -22,3 +23,7 @@ It will also set up `RTL-(React Testing Library)`
 ### Configure TailwindCSS in our project
 
 We will also use tailwind throughout our project, since we will not be using classic CSS
+
+### Formik (Forms without Hassle)
+
+In scenarios where we have huge forms with large number of fields, use Formik library to get form components
