@@ -1,8 +1,19 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { checkValidData } from '../utils/validate';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../utils/firebase';
 
 const LoginForm = () => {
     const [showModal, setShowModal] = useState('default');
+    const [errorMessage, setErrorMessage] = useState({});
+    const [fullNameErrorMessage, setFullNameErrorMessage] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
+    const [loginErrorMessage, setLoginErrorMessage] = useState('');
+    const fullName = useRef(null);
+    const email = useRef(null);
+    const password = useRef(null);
+    const confirmPassword = useRef(null);
 
     const handleOnMouseMove = (event) => {
         const { currentTarget } = event;
@@ -17,25 +28,73 @@ const LoginForm = () => {
     const closeLoginModal = (event) => {
         if (event === 'click' || event.type === 'click') {
             setShowModal('default');
+            setErrorMessage('');
+            setConfirmPasswordError('');
+            setFullNameErrorMessage('')
         }
     }
 
     const showForm = (type) => {
         setShowModal(type);
     }
+
+    const handleSubmit = (event) => {
+        const fullNameValue = fullName?.current?.value;
+        const emailId = email?.current?.value;
+        const passwordValue = password?.current?.value;
+        const confirmPasswordValue = confirmPassword?.current?.value;
+        const message = checkValidData({ emailId, password: passwordValue });
+        setErrorMessage(message);
+        if (passwordValue !== confirmPasswordValue) setConfirmPasswordError('Passwords do not match');
+        else setConfirmPasswordError('');
+        if (fullNameValue === '') setFullNameErrorMessage('Full Name cannot be empty');
+        else setFullNameErrorMessage('');
+        if (message === undefined) {
+            if (showModal === 'signUp' && confirmPasswordError === '' && fullNameErrorMessage === '') {
+                createUserWithEmailAndPassword(auth, emailId, passwordValue)
+                    .then((userCredential) => {
+                        const signedInuser = userCredential.user;
+                        setLoginErrorMessage(``);
+                        console.log(signedInuser);
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        setLoginErrorMessage(`${errorCode}-${errorMessage}`);
+                    });
+            }
+            if (showModal === 'logIn') {
+                signInWithEmailAndPassword(auth, emailId, passwordValue)
+                    .then((userCredential) => {
+                        const loggedInUser = userCredential.user;
+                        setLoginErrorMessage(``);
+                        console.log(loggedInUser)
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        setLoginErrorMessage(`${errorCode}-${errorMessage}`);
+                        if (errorCode === 'auth/invalid-credential') {
+                            setLoginErrorMessage(`Invalid Email Id or Password`);
+                        }
+                    })
+            }
+        }
+    }
+
     return (
-        <div className='w-full flex justify-center top-[25%] absolute bg-opacity-15'>
-            <div onMouseMove={event => handleOnMouseMove(event)} className={`${showModal === 'default' ? 'w-1/3' : 'w-1/4'} ease-in-out duration-200 flex justify-center h-[70%] bg-[rgba(255,255,255,0.15)] rounded-xl text-white relative before:bg-radialglow before:rounded-xl before:content-[""] before:h-full before:left-0 before:w-full before:z-[3] before:absolute before:opacity-0 before:transition-opacity before:duration-500  hover:before:opacity-100 after:bg-radialglowAfter after:rounded-xl after:content-[""] after:h-full after:left-0 after:w-full after:z-[1] after:absolute after:opacity-0 after:transition-opacity after:duration-500 hover:after:opacity-100 before:pointer-events-none after:pointer-events-none`}>
+        <div className='w-full flex justify-center top-[15rem] absolute bg-opacity-15'>
+            <div onMouseMove={event => handleOnMouseMove(event)} className={`${showModal === 'default' ? 'w-[40rem]' : 'w-96'} ease-in-out duration-200 flex justify-center h-[70%] bg-[rgba(255,255,255,0.15)] rounded-xl text-white relative before:bg-radialglow before:rounded-xl before:content-[""] before:h-full before:left-0 before:w-full before:z-[3] before:absolute before:opacity-0 before:transition-opacity before:duration-500  hover:before:opacity-100 after:bg-radialglowAfter after:rounded-xl after:content-[""] after:h-full after:left-0 after:w-full after:z-[1] after:absolute after:opacity-0 after:transition-opacity after:duration-500 hover:after:opacity-100 before:pointer-events-none after:pointer-events-none`}>
                 <div className='bg-[rgb(15,15,15)] rounded-xl m-[1px] flex flex-col relative flex-grow-[1] h-[calc(100%-2px)] w-[calc(100%-2px)] z-[2]'>
                     {showModal === 'default' && <div className={`flex flex-col animate-fadeInSmooth`}>
-                        <h1 className='font-bold text-5xl flex self-center pt-[10%]'>Welcome User!</h1>
+                        <h1 className='font-bold text-center text-5xl flex self-center pt-[10%]'>Welcome User!</h1>
                         <div className='flex flex-row px-[15%] pb-[20%] pt-[10%] justify-center'>
-                            <div className='flex flex-col justify-center'>
+                            <div className='flex flex-col justify-center text-center'>
                                 <label>Existing User?</label>
                                 <button className='text-[rgba(255,255,255)] font-bold text-3xl rounded-sm hover:text-[rgba(255,255,255,0.75)] hover:underline ease-in-out duration-300' onClick={e => showForm('logIn')}>Sign In</button>
                             </div>
                             <div className='border-l-2 border-gray-300 border-solid mx-16 h-40' />
-                            <div className='flex flex-col justify-center'>
+                            <div className='flex flex-col justify-center text-center'>
                                 <label>New User?</label>
                                 <button className='text-red-700 rounded-sm font-bold text-3xl hover:text-red-600 hover:underline ease-in-out duration-300' onClick={e => showForm('signUp')}>Sign Up</button>
                             </div>
@@ -48,13 +107,46 @@ const LoginForm = () => {
                                 <line x1="25" y1="15" x2="15" y2="25" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeMiterlimit="10"></line>
                             </svg>
                         </div>
-                        <form className='flex flex-col px-[15%] pb-[5%]'>
+                        <form onSubmit={e => e.preventDefault()} className='flex flex-col px-[15%] pb-[5%]'>
                             <label className='font-bold mb-5 text-3xl'>{`${showModal === 'logIn' ? 'Sign In' : 'Sign Up'}`}</label>
-                            {showModal === 'signUp' && <input type="text" placeholder='Full Name' className='px-3 py-4 my-2 h-[10%] rounded-md bg-[rgba(255,255,255,0.05)] border-gray-500 border border-solid' />}
-                            <input type="text" placeholder='Email Address' className='px-3 py-4 my-2 h-[10%] rounded-md bg-[rgba(255,255,255,0.05)] border-gray-500 border border-solid' />
-                            <input type="password" placeholder='Password' className='px-3 py-4 my-2 h-[10%] rounded-md bg-[rgba(255,255,255,0.05)] border-gray-500 border border-solid' />
-                            {showModal === 'signUp' && <input type="password" placeholder='Confirm Password' className='px-3 py-4 my-2 h-[10%] rounded-md bg-[rgba(255,255,255,0.05)] border-gray-500 border border-solid' />}
-                            <button className='p-4 mt-4 bg-red-700 rounded-[0.1875rem] hover:bg-red-600 ease-in-out duration-300'>{`${showModal === 'logIn' ? 'Sign In' : 'Sign Up'}`}</button>
+                            {showModal === 'signUp' &&
+                                <>
+                                    <input
+                                        type="text"
+                                        placeholder='Full Name'
+                                        ref={fullName}
+                                        className={`${fullNameErrorMessage !== '' && 'border-red-500'} px-3 py-4 my-2 h-[10%] rounded-md bg-[rgba(255,255,255,0.05)] border-gray-500 border border-solid`}
+                                    />
+                                    {fullNameErrorMessage !== '' && <p className='text-red-500 italic font-bold'>{fullNameErrorMessage}</p>}
+                                </>
+                            }
+                            <input
+                                type="text"
+                                placeholder='Email Address'
+                                ref={email}
+                                className={`${errorMessage?.field === 'email' && 'border-red-500'} px-3 py-4 my-2 h-[10%] rounded-md bg-[rgba(255,255,255,0.05)] border-gray-500 border border-solid`}
+                            />
+                            {errorMessage?.field === 'email' && <p className='text-red-500 italic font-bold'>{errorMessage?.message}</p>}
+                            <input
+                                type="password"
+                                placeholder='Password'
+                                ref={password}
+                                className={`${errorMessage?.field === 'password' && 'border-red-500'} px-3 py-4 my-2 h-[10%] rounded-md bg-[rgba(255,255,255,0.05)] border-gray-500 border border-solid`}
+                            />
+                            {errorMessage?.field === 'password' && <p className='text-red-500 italic font-bold'>{errorMessage?.message}</p>}
+                            {showModal === 'signUp' &&
+                                <>
+                                    <input
+                                        type="password"
+                                        placeholder='Confirm Password'
+                                        ref={confirmPassword}
+                                        className={`${confirmPasswordError !== '' && 'border-red-500'} px-3 py-4 my-2 h-[10%] rounded-md bg-[rgba(255,255,255,0.05)] border-gray-500 border border-solid`}
+                                    />
+                                    {confirmPasswordError !== '' && <p className='text-red-500 italic font-bold'>{confirmPasswordError}</p>}
+                                </>
+                            }
+                            {loginErrorMessage !== '' && <p className='text-red-500 italic font-bold'>{loginErrorMessage}</p>}
+                            <button className='p-4 mt-4 bg-red-700 rounded-[0.1875rem] hover:bg-red-600 ease-in-out duration-300' onClick={(e) => handleSubmit(e)}>{`${showModal === 'logIn' ? 'Sign In' : 'Sign Up'}`}</button>
                         </form>
                         <div className='pb-[15%] px-[15%]'>
                             {showModal === 'logIn' ? <p>New to Netflix? <button className='text-red-700 font-bold hover:underline' onClick={e => showForm('signUp')}>Sign up now.</button></p> : <p>Already have an account? <button className='text-red-700 font-bold hover:underline' onClick={e => showForm('logIn')}>Log in.</button></p>}
