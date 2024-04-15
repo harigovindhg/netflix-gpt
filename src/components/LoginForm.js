@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import { checkValidData } from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
@@ -16,8 +15,6 @@ const LoginForm = () => {
     // const [signUpSuccessMessage, setSignUpSuccessMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
-
-    const navigate = useNavigate();
 
     const fullName = useRef(null);
     const email = useRef(null);
@@ -70,7 +67,6 @@ const LoginForm = () => {
                             const { uid, displayName, email } = auth.currentUser;
                             dispatch(loginUser({ uid: uid, displayName: displayName, email: email }));
                             setLoginErrorMessage(``);
-                            navigate("/browse");
                         }).catch((error) => {
                             const errorCode = error.code;
                             const errorMessage = error.message;
@@ -89,7 +85,6 @@ const LoginForm = () => {
                 signInWithEmailAndPassword(auth, emailId, passwordValue)
                     .then((userCredential) => {
                         setLoginErrorMessage(``);
-                        navigate("/browse");
                     })
                     .catch((error) => {
                         const errorCode = error.code;
