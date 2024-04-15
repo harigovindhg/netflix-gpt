@@ -13,3 +13,7 @@ body {
     background-color: rgb(20, 20, 20);
     font-family: 'Uzi', sans-serif;
 }
+
+.animate-delay {
+    animation-delay: -0.5s;
+}

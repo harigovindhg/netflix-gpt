@@ -1,8 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import { checkValidData } from '../utils/validate';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../utils/firebase';
+import { loginUser } from '../utils/slices/loginSlice';
+import { useDispatch } from 'react-redux';
 
 const LoginForm = () => {
     const [showModal, setShowModal] = useState('default');
@@ -10,6 +13,12 @@ const LoginForm = () => {
     const [fullNameErrorMessage, setFullNameErrorMessage] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [loginErrorMessage, setLoginErrorMessage] = useState('');
+    // const [signUpSuccessMessage, setSignUpSuccessMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useDispatch();
+
+    const navigate = useNavigate();
+
     const fullName = useRef(null);
     const email = useRef(null);
     const password = useRef(null);
@@ -50,25 +59,37 @@ const LoginForm = () => {
         if (fullNameValue === '') setFullNameErrorMessage('Full Name cannot be empty');
         else setFullNameErrorMessage('');
         if (message === undefined) {
+            setIsLoading(true);
             if (showModal === 'signUp' && confirmPasswordError === '' && fullNameErrorMessage === '') {
                 createUserWithEmailAndPassword(auth, emailId, passwordValue)
                     .then((userCredential) => {
-                        const signedInuser = userCredential.user;
-                        setLoginErrorMessage(``);
-                        console.log(signedInuser);
+                        const user = userCredential.user
+                        updateProfile(user, {
+                            displayName: fullNameValue
+                        }).then(() => {
+                            const { uid, displayName, email } = auth.currentUser;
+                            dispatch(loginUser({ uid: uid, displayName: displayName, email: email }));
+                            setLoginErrorMessage(``);
+                            navigate("/browse");
+                        }).catch((error) => {
+                            const errorCode = error.code;
+                            const errorMessage = error.message;
+                            setLoginErrorMessage(`${errorCode}-${errorMessage}`);
+                            setIsLoading(false);
+                        });
                     })
                     .catch((error) => {
                         const errorCode = error.code;
                         const errorMessage = error.message;
                         setLoginErrorMessage(`${errorCode}-${errorMessage}`);
+                        setIsLoading(false);
                     });
             }
             if (showModal === 'logIn') {
                 signInWithEmailAndPassword(auth, emailId, passwordValue)
                     .then((userCredential) => {
-                        const loggedInUser = userCredential.user;
                         setLoginErrorMessage(``);
-                        console.log(loggedInUser)
+                        navigate("/browse");
                     })
                     .catch((error) => {
                         const errorCode = error.code;
@@ -76,6 +97,7 @@ const LoginForm = () => {
                         setLoginErrorMessage(`${errorCode}-${errorMessage}`);
                         if (errorCode === 'auth/invalid-credential') {
                             setLoginErrorMessage(`Invalid Email Id or Password`);
+                            setIsLoading(false);
                         }
                     })
             }
@@ -108,12 +130,14 @@ const LoginForm = () => {
                             </svg>
                         </div>
                         <form onSubmit={e => e.preventDefault()} className='flex flex-col px-[15%] pb-[5%]'>
+                            {/* {signUpSuccessMessage !== '' && <span className='p-2 mb-2 bg-green-900 border-green-400 border-solid border-2 rounded-lg'><p className='text-green-500'>{signUpSuccessMessage}</p></span>} */}
                             <label className='font-bold mb-5 text-3xl'>{`${showModal === 'logIn' ? 'Sign In' : 'Sign Up'}`}</label>
                             {showModal === 'signUp' &&
                                 <>
                                     <input
                                         type="text"
                                         placeholder='Full Name'
+                                        autoComplete='full-name'
                                         ref={fullName}
                                         className={`${fullNameErrorMessage !== '' && 'border-red-500'} px-3 py-4 my-2 h-[10%] rounded-md bg-[rgba(255,255,255,0.05)] border-gray-500 border border-solid`}
                                     />
@@ -123,6 +147,7 @@ const LoginForm = () => {
                             <input
                                 type="text"
                                 placeholder='Email Address'
+                                autoComplete='emailid'
                                 ref={email}
                                 className={`${errorMessage?.field === 'email' && 'border-red-500'} px-3 py-4 my-2 h-[10%] rounded-md bg-[rgba(255,255,255,0.05)] border-gray-500 border border-solid`}
                             />
@@ -130,6 +155,7 @@ const LoginForm = () => {
                             <input
                                 type="password"
                                 placeholder='Password'
+                                autoComplete='current-password'
                                 ref={password}
                                 className={`${errorMessage?.field === 'password' && 'border-red-500'} px-3 py-4 my-2 h-[10%] rounded-md bg-[rgba(255,255,255,0.05)] border-gray-500 border border-solid`}
                             />
@@ -139,6 +165,7 @@ const LoginForm = () => {
                                     <input
                                         type="password"
                                         placeholder='Confirm Password'
+                                        autoComplete='confirm-password'
                                         ref={confirmPassword}
                                         className={`${confirmPasswordError !== '' && 'border-red-500'} px-3 py-4 my-2 h-[10%] rounded-md bg-[rgba(255,255,255,0.05)] border-gray-500 border border-solid`}
                                     />
@@ -146,7 +173,8 @@ const LoginForm = () => {
                                 </>
                             }
                             {loginErrorMessage !== '' && <p className='text-red-500 italic font-bold'>{loginErrorMessage}</p>}
-                            <button className='p-4 mt-4 bg-red-700 rounded-[0.1875rem] hover:bg-red-600 ease-in-out duration-300' onClick={(e) => handleSubmit(e)}>{`${showModal === 'logIn' ? 'Sign In' : 'Sign Up'}`}</button>
+                            {/* <button className='p-4 mt-4 bg-red-700 rounded-[0.1875rem] hover:bg-red-600 ease-in-out duration-300' onClick={(e) => handleSubmit(e)}>{isLoading ? <div class="block relative w-[50px] h-[50px] "><div className='absolute border-4 border-solid border-white opacity-100 rounded-[50%] animate-rippleSpinner'></div><div className='absolute border-4 border-solid border-white opacity-100 rounded-[50%] animate-rippleSpinner animate-delay'></div></div> : `${showModal === 'logIn' ? 'Sign In' : 'Sign Up'}`}</button> */}
+                            {isLoading ? <div className='mt-4 flex justify-center overflow-hidden bg-red-700 rounded-[0.1875rem]'><div class="inline-block relative w-[58px] h-[58px]"><div className='absolute border-4 border-solid border-white opacity-100 rounded-[50%] animate-rippleSpinner'></div><div className='absolute border-4 border-solid border-white opacity-100 rounded-[50%] animate-rippleSpinner'></div></div></div> : <button className='mt-4 h-[50px] bg-red-700 rounded-[0.1875rem] hover:bg-red-600 ease-in-out duration-300' onClick={(e) => handleSubmit(e)}>{`${showModal === 'logIn' ? 'Sign In' : 'Sign Up'}`}</button>}
                         </form>
                         <div className='pb-[15%] px-[15%]'>
                             {showModal === 'logIn' ? <p>New to Netflix? <button className='text-red-700 font-bold hover:underline' onClick={e => showForm('signUp')}>Sign up now.</button></p> : <p>Already have an account? <button className='text-red-700 font-bold hover:underline' onClick={e => showForm('logIn')}>Log in.</button></p>}
