@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { loginUser, logoutUser } from '../utils/slices/loginSlice';
 import { NETFLIX_LOGO, USER_AVATAR } from '../utils/constants';
 
 const Header = () => {
+    const [showTooltip, setShowTooltip] = useState(false);
     const loginStatus = useSelector((store) => store.login)
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const Header = () => {
         // Unsubscribe when the component unmounts
         return () => unsubscribe();
 
-    }, [dispatch]);
+    }, [dispatch, navigate]);
 
     const handleSignOut = (e) => {
         signOut(auth).then(() => {
@@ -45,28 +46,43 @@ const Header = () => {
     //         navigate('/');
     //     }
     // }
+
+    const showSignOutTooltip = (e) => {
+        setShowTooltip(!showTooltip);
+    }
+
     return (
         <>
-            <div className='absolute w-full h-[100vh] bg-[#282537] bg-glowBGGradient z-[-1]' />
+            {/* <div className='absolute w-full h-[100vh] bg-[#282537] bg-glowBGGradient z-[-1]' /> */}
             <div className='w-full h-auto flex p-[2%] absolute top-0 bg-gradient-to-b from-[#0000009e] z-20 justify-center md:justify-between'>
                 <div data-layout="item" className="w-auto">
                     <a data-uia="" href={loginStatus !== null ? '/browse' : '/'}>
                         <img className="w-[12rem] text-red-600 fill-current block" src={NETFLIX_LOGO} alt="Netflix Logo" />
                     </a>
                 </div>
-                {loginStatus !== null && <div data-layout="item" className="w-[10%] text-center flex flex-row flex-wrap relative items-center group" >
-                    <a data-uia="" href={loginStatus !== null ? '/browse' : '/'}>
+                {loginStatus !== null && <div data-layout="item" className="w-[10%] text-center flex md:flex-col flex-row flex-wrap relative items-center group" >
+                    <div className='flex flex-row items-center' tabIndex={0} onKeyDown={e => showSignOutTooltip()} onClick={e => showSignOutTooltip()}>
                         <img className="w-12 rounded-md block" src={USER_AVATAR} alt="User Avatar" />
-                    </a>
-                    <div class="absolute left-5 items-center hidden ml-6 group-hover:flex">
-                        <span class="relative z-10 leading-none text-white whitespace-no-wrap ">
+                        <span className={`hidden md:block border-t-white border-l-transparent border-r-transparent border-b-transparent border-solid border-t-4 border-r-4 border-b-0 border-l-4 ml-3 group-hover:rotate-180 ${showTooltip && 'rotate-180'}`} role="presentation"></span>
+                    </div>
+                    <div className="absolute left-5 md:top-8 md:left-auto flex-col items-center md:hidden ml-6 md:mt-6 md:ml-0 md:group-hover:flex">
+                        <span className="relative z-10 leading-none text-white whitespace-no-wrap ">
                             <div className={`relative animate-fadeInSmooth ease-in-out duration-500 ml-2 rounded-lg text-center content-center hover:bg-gray-600 bg-gray-300 hover:text-white text-gray-800`}>
                                 <div className='border-gray-800 border-solid border-2 hover:border-gray-400 m-[2px] rounded-md'>
-                                    <button className='p-4' onClick={e => handleSignOut(e)}>{'Sign Out'}</button>
+                                    <button tabIndex={0} className='p-4' onClick={e => handleSignOut(e)}>{'Sign Out'}</button>
                                 </div>
                             </div>
                         </span>
                     </div>
+                    {showTooltip && <div className="absolute left-5 md:top-8 md:left-auto flex-col items-center ml-6 md:mt-6 md:ml-0 md:flex">
+                        <span className="relative z-10 leading-none text-white whitespace-no-wrap ">
+                            <div className={`relative animate-fadeInSmooth ease-in-out duration-500 ml-2 rounded-lg text-center content-center hover:bg-gray-600 bg-gray-300 hover:text-white text-gray-800`}>
+                                <div className='border-gray-800 border-solid border-2 hover:border-gray-400 m-[2px] rounded-md'>
+                                    <button tabIndex={0} className='p-4' onClick={e => handleSignOut(e)}>{'Sign Out'}</button>
+                                </div>
+                            </div>
+                        </span>
+                    </div>}
                 </div>}
             </div>
         </>
