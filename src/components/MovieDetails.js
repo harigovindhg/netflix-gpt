@@ -2,12 +2,15 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import useMovieDetails from '../hooks/useMovieDetails';
+import useVideoBg from '../hooks/useVideoBg';
 import { IMAGE_CDN } from '../utils/constants';
 
 const MovieDetails = () => {
     const { movieId, isTVShow } = useParams();
     useMovieDetails(movieId, isTVShow);
+    useVideoBg(movieId, true)
     const movieData = useSelector(store => store.movies.movieDetails);
+    const movieDetailsTrailer = useSelector(store => store.movies?.movieDetailsTrailer);
     console.log(movieData);
 
     if (!movieData) return;
@@ -24,7 +27,7 @@ const MovieDetails = () => {
                     <div className='text-white p-4 h-full blurred-sub-box group flex flex-col items-center'>
                         <div className='flex flex-col w-full justify-around items-center'>
                             <div className="items-center flex w-1/2 mt-[40%] opacity-0 group-hover:opacity-100">
-                                <a className="z-10 leading-none text-white whitespace-no-wrap w-full" href={``}>
+                                <a className="z-10 leading-none text-white whitespace-no-wrap w-full" href={`https://www.youtube.com/watch?v=${movieDetailsTrailer?.key}`} target='_blank'>
                                     <div className={`relative blurred-box animate-fadeInSmooth ease-in-out duration-500 rounded-lg text-center content-center bg-gray-300 text-white`}>
                                         <div className='border-black border-solid border-2 animate-fadeInSmooth ease-in-out duration-500 hover:border-gray-200 m-[2px] rounded-md'>
                                             <div className='p-4 text-white'>{'▶ Watch Trailer'}</div>
