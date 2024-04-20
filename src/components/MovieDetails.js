@@ -59,7 +59,7 @@ const MovieDetails = () => {
                         </div>
                     </div>
                 </div>
-                <div className='w-full flex flex-row text-xl text-center justify-center'>
+                <div className='w-full flex flex-col md:flex-row text-xl text-center justify-center items-center'>
                     {
                         genres?.map((genre) => (
                             <div className='text-xl block p-4 m-4 relative w-fit rounded-2xl bg-gray-800' key={genre.id}>{genre.name}</div>
