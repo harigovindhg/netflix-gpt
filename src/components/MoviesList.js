@@ -1,7 +1,7 @@
 import React from 'react'
 import MovieCard from './MovieCard'
 
-const MoviesList = ({ title, movieList }) => {
+const MoviesList = ({ title, movieList, isTVShow }) => {
     return (
         <div className='relative md:mt-[2%] bg-gradient-to-t from-black flex flex-col'>
             <h2 className='text-white font-bold text-5xl mb-[1%] pl-[2%] flex self-center md:self-start'>{title}</h2>
@@ -10,7 +10,7 @@ const MoviesList = ({ title, movieList }) => {
                 {
                     movieList && movieList.map(movie => {
                         return (
-                            <MovieCard data={movie} key={movie?.id} />
+                            <MovieCard data={movie} isTVShow={isTVShow} key={movie?.id} />
                         )
                     })
                 }

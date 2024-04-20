@@ -8,9 +8,9 @@ const MovieCatalogListContainer = () => {
     const airingTodayTVShows = useSelector(store => store.movies.airingTodayTVShows)
     return (
         <div className='mt-[5%] md:-mt-[20%]'>
-            <MoviesList title={"Now Playing"} movieList={nowPlayingMoviesList} />
-            <MoviesList title={"Popular"} movieList={popularMoviesList} />
-            <MoviesList title={"TV Shows Airing Today"} movieList={airingTodayTVShows} />
+            <MoviesList title={"Now Playing"} movieList={nowPlayingMoviesList} isTVShow={false} />
+            <MoviesList title={"Popular"} movieList={popularMoviesList} isTVShow={false} />
+            <MoviesList title={"TV Shows Airing Today"} movieList={airingTodayTVShows} isTVShow />
         </div>
 
     )

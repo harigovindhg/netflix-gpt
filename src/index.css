@@ -52,9 +52,8 @@ body {
     &:hover {
         position: relative;
         background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.35) 50%, rgba(0, 0, 0, 1) 100%);
-        transition: all 200ms ease-in-out;
+        transition: all 250ms ease-in-out;
         backdrop-filter: blur(2px);
-        animation: resize 1.5s .5s;
     }
 }
 
