@@ -37,9 +37,12 @@ body {
         bottom: 0;
         left: 0;
         right: 0;
-        /* backdrop-filter: blur(5px); */
         background-color: rgba(255, 255, 255, .075);
         z-index: -1;
+    }
+
+    &:active {
+        background: rgba(255, 255, 255, 0.349);
     }
 }
 
@@ -48,10 +51,20 @@ body {
 
     &:hover {
         position: relative;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.35) 50%, rgba(0, 0, 0, 1) 100%);
         transition: all 200ms ease-in-out;
         backdrop-filter: blur(2px);
         animation: resize 1.5s .5s;
     }
+}
+
+.wrappedOverview {
+    display: -webkit-box;
+    max-width: 300px;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 *::-webkit-scrollbar {
