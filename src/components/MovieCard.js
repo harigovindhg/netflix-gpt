@@ -3,17 +3,16 @@ import { IMAGE_CDN } from '../utils/constants';
 import { useNavigate } from 'react-router-dom';
 
 const MovieCard = ({ data, isTVShow }) => {
-    const { original_title, vote_average, vote_count, backdrop_path, original_name, overview } = data;
+    const { original_title, vote_average, vote_count, poster_path, backdrop_path, original_name, overview } = data;
     const modifiedVote = Math.round(vote_average * 100) / 100;
     const modifiedVoteCount = vote_count / 1000 > 1 ? `${(Math.round((vote_count / 1000) * 100) / 100)} k` : vote_count;
     const navigate = useNavigate();
-
     const redirectToMovieDetails = (movieData, isTVShowFlag) => {
         navigate(`/browse/detail/${movieData?.id}/${isTVShowFlag}`);
     }
 
     return (
-        <div className={`w-[220px] h-[330px] mr-4 rounded-md blurred-box`} style={{ backgroundImage: `url(${IMAGE_CDN}${backdrop_path})`, backgroundSize: 'cover' }}>
+        <div className={`w-[220px] h-[330px] mr-4 rounded-md blurred-box`} style={{ backgroundImage: `url(${IMAGE_CDN}${poster_path ? poster_path : backdrop_path})`, backgroundSize: 'cover' }}>
             {/* <div className='text-white bg-gradient-to-b p-4 from-black h-full blurred-sub-box group flex flex-col justify-between'> */}
             <div className='text-white p-4 h-full blurred-sub-box group flex flex-col justify-between'>
                 {/* <h1 className='h-[100px] text-xl font-sans font-bold group-hover:text-3xl transition-all ease-in-out duration-150'>{original_title ? original_title : original_name}</h1> */}

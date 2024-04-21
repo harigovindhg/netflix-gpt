@@ -4,6 +4,8 @@ export const USER_AVATAR = "https://occ-0-1946-2164.1.nflxso.net/dnm/api/v6/vN7b
 
 export const IMAGE_CDN = "https://image.tmdb.org/t/p/w440_and_h660_face";
 
+export const IMAGE_CDN_LQ = "https://image.tmdb.org/t/p/h30";
+
 export const API_OPTIONS = {
     method: 'GET',
     headers: {

@@ -46,6 +46,11 @@ body {
     }
 }
 
+.backgroundNetwork {
+    /* background: linear-gradient(180deg, rgba(75, 85, 99, 1), rgba(0, 0, 0, 0) 50%, rgba(75, 85, 99, 1) 100%); */
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
 .blurred-sub-box {
     background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%);
 
