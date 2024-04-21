@@ -70,7 +70,7 @@ const MovieDetails = () => {
                 {isTVShow === "true" &&
                     <>
                         {/* <div className='w-[75%] border-b-2 border-white mt-[1%]' /> */}
-                        <div className='w-full flex flex-col items-center bg-gradient-to-t from-gray-500'>
+                        <div className='w-full flex flex-col items-center bg-gradient-to-t from-gray-500 left-0 bottom-0'>
                             <div className='w-full text-2xl my-[1%] text-center font-bold '>{'Watch On'}</div>
                             <div className='w-full flex flex-col md:flex-row text-xl text-center justify-center items-center mb-[1%]'>
                                 {
