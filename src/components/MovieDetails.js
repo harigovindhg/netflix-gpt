@@ -75,7 +75,7 @@ const MovieDetails = () => {
                             <div className='w-full flex flex-col md:flex-row text-xl text-center justify-center items-center mb-[1%]'>
                                 {
                                     networks?.map((network) => (
-                                        <img className='mx-[1%]' src={`${IMAGE_CDN_LQ}${network.logo_path}`} key={network.id} aria-label={network.name} />
+                                        <img className='m-[1%]' src={`${IMAGE_CDN_LQ}${network.logo_path}`} key={network.id} aria-label={network.name} />
                                     ))
                                 }
                             </div>
