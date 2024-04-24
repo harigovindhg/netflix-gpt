@@ -5,9 +5,11 @@ import Browse from './Browse';
 import Header from './Header';
 import MovieDetails from './MovieDetails';
 import GPTSearch from './GPTSearch';
+import { useDispatch } from 'react-redux';
+import { toggleOpaqueHeader } from '../utils/slices/windowSlice';
 
 const Body = () => {
-
+    const dispatch = useDispatch();
     const AppContainer = () => {
         return (
             <div className='AppContainer'>
@@ -17,6 +19,18 @@ const Body = () => {
             </div>
         )
     }
+
+    function resizeHeaderOnScroll() {
+        const distanceY = window.scrollY || document.documentElement.scrollTop;
+        const shrinkOn = 10;
+
+        if (distanceY > shrinkOn) {
+            dispatch(toggleOpaqueHeader(true))
+        } else {
+            dispatch(toggleOpaqueHeader(false))
+        }
+    }
+    window.addEventListener("scroll", resizeHeaderOnScroll);
 
     const appRouter = createBrowserRouter([
         {
