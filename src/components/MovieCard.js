@@ -1,13 +1,17 @@
 import React from 'react';
 import { IMAGE_CDN } from '../utils/constants';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { closeGPTSearchBar } from '../utils/slices/gptSlice';
 
 const MovieCard = ({ data, isTVShow }) => {
     const { original_title, vote_average, vote_count, poster_path, backdrop_path, original_name, overview } = data;
     const modifiedVote = Math.round(vote_average * 100) / 100;
     const modifiedVoteCount = vote_count / 1000 > 1 ? `${(Math.round((vote_count / 1000) * 100) / 100)} k` : vote_count;
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const redirectToMovieDetails = (movieData, isTVShowFlag) => {
+        dispatch(closeGPTSearchBar());
         navigate(`/browse/detail/${movieData?.id}/${isTVShowFlag}`);
     }
 

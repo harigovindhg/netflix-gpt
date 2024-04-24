@@ -10,7 +10,7 @@ import { NETFLIX_LOGO, USER_AVATAR } from '../utils/constants';
 
 const Header = () => {
     const [showTooltip, setShowTooltip] = useState(false);
-    const loginStatus = useSelector((store) => store.login)
+    const loginStatus = useSelector((store) => store.login);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
