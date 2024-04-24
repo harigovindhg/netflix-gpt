@@ -49,8 +49,8 @@ const GPTSearchBar = () => {
     }
 
     return (
-        <>
-            <input type="text" ref={searchText} className={`h-14 p-4 rounded-lg text-black ${searchText !== '' ? 'w-[30%] mr-[2%]' : 'w-[40%]'}`} placeholder='✨Search by categories, region, movie name, recommendation etc.' />
+        <div className='w-full flex flex-col md:flex-row items-center justify-center'>
+            <input type="text" ref={searchText} className={`h-14 p-4 rounded-lg text-black md:w-[30%] md:mr-[2%] mb-[4%] md:mb-0`} placeholder='✨Search by categories, region, movie name, recommendation etc.' />
             <button className="z-10 h-14 leading-none text-white whitespace-no-wrap lg:w-[8%] md:w-1/6 w-1/4">
                 <div className={`relative blurred-box animate-fadeInSmooth ease-in-out duration-500 rounded-lg text-center content-center bg-gray-300 text-white`}>
                     <div className='border-black border-solid border-2 animate-fadeInSmooth ease-in-out duration-500 hover:border-gray-200 m-[2px] rounded-md'>
@@ -58,7 +58,7 @@ const GPTSearchBar = () => {
                     </div>
                 </div>
             </button>
-        </>
+        </div>
     )
 }
 
