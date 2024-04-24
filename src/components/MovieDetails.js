@@ -11,7 +11,6 @@ const MovieDetails = () => {
     useVideoBg(movieId, true, isTVShow);
     const movieData = useSelector(store => store.movies.movieDetails);
     const movieDetailsTrailer = useSelector(store => store.movies?.movieDetailsTrailer);
-    console.log(movieData);
     if (!movieData) return;
 
     const { original_title, vote_average, vote_count, poster_path, backdrop_path, original_name, overview, tagline, homepage, genres, networks, first_air_date } = movieData;

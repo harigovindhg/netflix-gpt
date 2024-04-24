@@ -30,11 +30,17 @@ module.exports = {
             height: '58px',
             opacity: 0
           }
+        },
+        scale: {
+          '50%': {
+            scale: 'var(--scale-x, 1) var(--scale-y, 1)'
+          }
         }
       },
       animation: {
         fadeInSmooth: 'fadeIn 250ms ease-in-out normal',
         rippleSpinner: 'rippleSpin 1s cubic-bezier(0, 0.2, 0.8, 1) infinite'
+
       }
     },
   },

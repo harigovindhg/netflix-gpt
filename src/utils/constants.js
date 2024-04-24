@@ -10,6 +10,8 @@ export const API_OPTIONS = {
     method: 'GET',
     headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMDNiYWM2MWQ2NjgwOGZhZTc1MTRmNTcwNGFkN2Y4YSIsInN1YiI6IjY2MWQxNDI5ZmQ0YTk2MDE4NjZjMmYxMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XcoL8UunYgQGKkUF9oon3nloPpR5h0Qj8BV9OBKiwVI'
+        Authorization: `Bearer ${process.env.REACT_APP_TMDB_KEY}`
     }
 };
+
+export const GPT_KEY = process.env.REACT_APP_OPENAI_KEY;

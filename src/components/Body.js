@@ -4,6 +4,7 @@ import Login from './Login';
 import Browse from './Browse';
 import Header from './Header';
 import MovieDetails from './MovieDetails';
+import GPTSearch from './GPTSearch';
 
 const Body = () => {
 
@@ -12,6 +13,7 @@ const Body = () => {
             <div className='AppContainer'>
                 <Header />
                 <Outlet />
+                <GPTSearch />
             </div>
         )
     }

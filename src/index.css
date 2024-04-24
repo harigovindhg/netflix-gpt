@@ -13,7 +13,7 @@ body {
     /* background-image: -webkit-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%); */
     font-family: 'Uzi', sans-serif;
     background: black;
-    /* overflow-x: hidden; */
+    /* overflow-y: hidden; */
 }
 
 .animate-delay {
@@ -60,6 +60,15 @@ body {
         transition: all 250ms ease-in-out;
         backdrop-filter: blur(2px);
     }
+}
+
+.search-gpt-overlay {
+    transition: all 250ms ease-in-out;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.35) 50%, rgba(0, 0, 0, 1) 100%);
+    backdrop-filter: blur(15px);
+    width: 100%;
+    height: 215%;
+    overflow-y: hidden;
 }
 
 .wrappedOverview {
