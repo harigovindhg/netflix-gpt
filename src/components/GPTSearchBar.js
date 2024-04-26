@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import openai from '../utils/openai';
 import { API_OPTIONS } from '../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
@@ -60,7 +60,7 @@ const GPTSearchBar = () => {
 
     return (
         <div className='w-full flex flex-col md:flex-row items-center justify-center'>
-            <input type="text" maxLength={50} ref={searchText} className={`h-14 p-4 rounded-lg text-black md:w-[30%] md:mr-[2%] mb-[4%] md:mb-0`} placeholder='✨Search by categories, region, movie name, recommendation etc.' />
+            <input type="text" maxLength={50} ref={searchText} className={`h-14 p-4 rounded-lg text-black w-[80%] md:w-[30%] md:mr-[2%] mb-[4%] md:mb-0`} placeholder='Search for anything you want :D' />
             <button className="z-10 h-14 leading-none text-white whitespace-no-wrap lg:w-[8%] md:w-1/6 w-1/4">
                 <div className={`relative blurred-box animate-fadeInSmooth ease-in-out duration-500 rounded-lg text-center content-center bg-gray-300 text-white`}>
                     <div className='border-black border-solid border-2 animate-fadeInSmooth ease-in-out duration-500 hover:border-gray-200 m-[2px] rounded-md'>
