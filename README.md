@@ -24,7 +24,21 @@ Netflix GPT project built on React with Redux stores, Tailwind CSS, Firebase Aut
 
 ## Screens:
 - Login/Sign-Up
-- Landing page (Movie Trailer BG, Now Playing Movies, Popular Movies, Latest TV Shows
+- Landing page (Movie Trailer BG, Now Playing Movies, Popular Movies, Latest TV Shows)
 - Movie details page
 - GPT Search
 - GPT Search Results
+
+## Screenshots:
+### Login/Sign Up Landing
+![SignUpLoginLanding.png](/assets/images/SignUpLoginLanding.png)
+### Sign Up Form
+![SignUpForm.png](/assets/images/SignUpForm.png)
+### Sign In Form
+![SignInForm.png](/assets/images/SignInForm.png)
+### Landing Page
+![Landing.png](/assets/images/Landing.png)
+### Movie Details
+![Movie Details.png](/assets/images/Movie%20Details.png)
+### AI Smart Search Overlay/Page
+![AI Search.png](/assets/images/AI%20Search.png)
