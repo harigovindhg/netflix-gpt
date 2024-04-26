@@ -12,6 +12,7 @@ const Header = () => {
     const [showTooltip, setShowTooltip] = useState(false);
     const loginStatus = useSelector((store) => store.login);
     const opaqueHeader = useSelector((store) => store.windows.opaqueHeader);
+    const isGptSearchOpen = useSelector((store) => store.gpt.showGPTSearch);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -33,7 +34,9 @@ const Header = () => {
     }, [dispatch, navigate]);
 
     const handleSignOut = (e) => {
-        dispatch(toggleGPTSearchBar());
+        if (isGptSearchOpen) {
+            dispatch(toggleGPTSearchBar());
+        }
         signOut(auth).then(() => {
             navigate("/");
         }).catch((error) => {
