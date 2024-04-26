@@ -17,6 +17,9 @@ const GPTSearchBar = () => {
     }
 
     const handleSearch = async (e) => {
+        if (searchText?.current?.value === '' || searchText?.current?.value === ' ') {
+            return;
+        }
         dispatch(updateFetchingResultsProcess('loading'));
         const gptQuery = `Act as a movie recommendation system, and suggest top 5 movies/shows that match the query: "${searchText.current.value}". Only provide 5 results, in comma separated format. If any of the results is a show, mention it within brackets like in the given example. Example: Godzilla, Get Out, The Shining, Dark (TV Show), Young Sheldon (TV Show)`;
         // console.log(gptQuery);
