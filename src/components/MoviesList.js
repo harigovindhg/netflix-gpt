@@ -10,7 +10,7 @@ const MoviesList = ({ title, movieList, isTVShow, gptSearchList }) => {
                 {
                     movieList && movieList.map(movie => {
                         return (
-                            <MovieCard data={movie} isTVShow={isTVShow} key={movie?.id} />
+                            <MovieCard data={movie} isTVShow={isTVShow} key={movie?.id} gptSearchList={gptSearchList} />
                         )
                     })
                 }

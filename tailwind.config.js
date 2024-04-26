@@ -17,8 +17,8 @@ module.exports = {
         },
         rippleSpin: {
           '0%': {
-            top: '29px',
-            left: '29px',
+            top: '25px',
+            left: '25px',
             width: 0,
             height: 0,
             opacity: 1
@@ -26,8 +26,8 @@ module.exports = {
           '100%': {
             top: '-1px',
             left: '-1px',
-            width: '58px',
-            height: '58px',
+            width: '50px',
+            height: '50px',
             opacity: 0
           }
         },

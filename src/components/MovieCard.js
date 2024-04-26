@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { closeGPTSearchBar } from '../utils/slices/gptSlice';
 
-const MovieCard = ({ data, isTVShow }) => {
+const MovieCard = ({ data, isTVShow, gptSearchList }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const MovieCard = ({ data, isTVShow }) => {
     }
 
     return (
-        <div className={`w-[220px] h-[330px] mr-4 rounded-md blurred-box`} style={{ backgroundImage: `url(${IMAGE_CDN}${poster_path ? poster_path : backdrop_path})`, backgroundSize: 'cover' }}>
+        <div className={`w-[220px] h-[330px] ${gptSearchList == true ? '' : 'mr-4'} rounded-md blurred-box`} style={{ backgroundImage: `url(${IMAGE_CDN}${poster_path ? poster_path : backdrop_path})`, backgroundSize: 'cover' }}>
             {/* <div className='text-white bg-gradient-to-b p-4 from-black h-full blurred-sub-box group flex flex-col justify-between'> */}
             <div className='text-white p-4 h-full blurred-sub-box group flex flex-col justify-between'>
                 {/* <h1 className='h-[100px] text-xl font-sans font-bold group-hover:text-3xl transition-all ease-in-out duration-150'>{original_title ? original_title : original_name}</h1> */}
