@@ -8,7 +8,7 @@ const GPTSearchResults = () => {
     const fetchResultsStatus = useSelector(store => store.gpt.fetchingResultsStatus);
 
     return (
-        <div className='w-full mt-[5%] flex flex-col items-center overflow-y-visible'>
+        <div className='w-full mt-[1%] flex flex-col items-center overflow-y-visible'>
             {
                 fetchResultsStatus === 'idle' || fetchResultsStatus === 'loading' ? <div className='flex flex-row w-full items-center justify-center'>
                     <h2 className='md:text-6xl text-4xl font-bold flex flex-col md:contents items-center'>

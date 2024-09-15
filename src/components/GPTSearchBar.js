@@ -17,6 +17,7 @@ const GPTSearchBar = () => {
     }
 
     const handleSearch = async (e) => {
+        e.preventDefault();
         if (searchText?.current?.value === '' || searchText?.current?.value === ' ') {
             return;
         }
@@ -59,16 +60,16 @@ const GPTSearchBar = () => {
     }
 
     return (
-        <div className='w-full flex flex-col md:flex-row items-center justify-center'>
+        <form className='w-full flex flex-col md:flex-row items-center justify-center' onSubmit={e => handleSearch(e)}>
             <input type="text" maxLength={50} ref={searchText} className={`h-14 p-4 rounded-lg text-black w-[80%] md:w-[30%] md:mr-[2%] mb-[4%] md:mb-0`} placeholder='Search for anything you want :D' />
-            <button className="z-10 h-14 leading-none text-white whitespace-no-wrap lg:w-[8%] md:w-1/6 w-1/4">
+            <button type='submit' className="z-10 h-14 leading-none text-white whitespace-no-wrap lg:w-[8%] md:w-1/6 w-1/4">
                 <div className={`relative blurred-box animate-fadeInSmooth ease-in-out duration-500 rounded-lg text-center content-center bg-gray-300 text-white`}>
                     <div className='border-black border-solid border-2 animate-fadeInSmooth ease-in-out duration-500 hover:border-gray-200 m-[2px] rounded-md'>
                         {fetchResultsStatus === 'loading' ? <div className='flex justify-center overflow-hidden bg-transparent rounded-[0.1875rem]'><div className="inline-block relative w-[50px] h-[50px]"><div className='absolute border-4 border-solid border-white opacity-100 rounded-[50%] animate-rippleSpinner'></div><div className='absolute border-4 border-solid border-white opacity-100 rounded-[50%] animate-rippleSpinner'></div></div></div> : <div className='p-4 text-white' onClick={e => handleSearch(e)}>{'Search'}</div>}
                     </div>
                 </div>
             </button>
-        </div>
+        </form>
     )
 }
 

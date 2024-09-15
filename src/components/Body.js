@@ -30,7 +30,7 @@ const Body = () => {
             dispatch(toggleOpaqueHeader(false))
         }
     }
-    window.addEventListener("scroll", resizeHeaderOnScroll);
+    // window.addEventListener("scroll", resizeHeaderOnScroll);
 
     const appRouter = createBrowserRouter([
         {

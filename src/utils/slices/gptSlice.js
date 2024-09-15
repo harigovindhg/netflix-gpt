@@ -21,12 +21,17 @@ const gptSlice = createSlice({
         addGptTVShowsResult: (state, action) => {
             state.gptTVShowsResult = action.payload
         },
-        updateFetchingResultsProcess: (store, action) => {
-            store.fetchingResultsStatus = action.payload
+        updateFetchingResultsProcess: (state, action) => {
+            state.fetchingResultsStatus = action.payload
+        },
+        clearGPTSearchResult: (state, action) => {
+            state.fetchingResultsStatus = 'idle';
+            state.gptMoviesResult = null;
+            state.gptTVShowsResult = null;
         }
     }
 });
 
-export const { toggleGPTSearchBar, addGptMoviesResult, addGptTVShowsResult, closeGPTSearchBar, updateFetchingResultsProcess } = gptSlice.actions;
+export const { toggleGPTSearchBar, addGptMoviesResult, addGptTVShowsResult, closeGPTSearchBar, updateFetchingResultsProcess, clearGPTSearchResult } = gptSlice.actions;
 
 export default gptSlice.reducer;
