@@ -82,7 +82,7 @@ const MovieDetails = () => {
                         {/* <div className='w-[75%] border-b-2 border-white mt-[1%]' /> */}
                         <div className='w-full relative flex flex-col items-center bg-gradient-to-t from-gray-500 bottom-0 left-0'>
                             <div className='w-full text-2xl my-[1%] text-center font-bold '>{'Watch On'}</div>
-                            <div className='w-full flex flex-col md:flex-row text-xl text-center justify-center items-center mb-[1%]'>
+                            <div className='w-full flex flex-col md:flex-row text-xl text-center justify-center items-center mb-[1%] flex-wrap'>
                                 {
                                     networks?.map((network) => (
                                         <img className='m-[1%]' src={`${IMAGE_CDN_LQ}${network.logo_path}`} key={network.id} aria-label={network.name} />
