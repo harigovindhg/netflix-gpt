@@ -7,6 +7,7 @@ import MovieDetails from './MovieDetails';
 import GPTSearch from './GPTSearch';
 import { useDispatch } from 'react-redux';
 import { toggleOpaqueHeader } from '../utils/slices/windowSlice';
+import Error from './Error';
 
 const Body = () => {
     const dispatch = useDispatch();
@@ -49,7 +50,8 @@ const Body = () => {
                     path: '/browse/detail/:movieId/:isTVShow?',
                     element: <MovieDetails />
                 }
-            ]
+            ],
+            errorElement: <Error />
         }
     ]);
 
