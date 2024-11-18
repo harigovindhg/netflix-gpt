@@ -172,7 +172,7 @@ const LoginForm = () => {
                             {isLoading ? <div className='mt-4 flex justify-center overflow-hidden bg-red-700 rounded-[0.1875rem]'><div className="inline-block relative w-[50px] h-[50px]"><div className='absolute border-4 border-solid border-white opacity-100 rounded-[50%] animate-rippleSpinner'></div><div className='absolute border-4 border-solid border-white opacity-100 rounded-[50%] animate-rippleSpinner'></div></div></div> : <button className='mt-4 h-[50px] bg-red-700 rounded-[0.1875rem] hover:bg-red-600 ease-in-out duration-300' onClick={(e) => handleSubmit(e)}>{`${showModal === 'logIn' ? 'Sign In' : 'Sign Up'}`}</button>}
                         </form>
                         <div className='pb-[15%] px-[15%]'>
-                            {showModal === 'logIn' ? <p>New to Netflix? <button className='text-red-700 font-bold hover:underline' onClick={e => showForm('signUp')}>Sign up now.</button></p> : <p>Already have an account? <button className='text-red-700 font-bold hover:underline' onClick={e => showForm('logIn')}>Log in.</button></p>}
+                            {showModal === 'logIn' ? <p>New to Celluloid? <button className='text-red-700 font-bold hover:underline' onClick={e => showForm('signUp')}>Sign up now.</button></p> : <p>Already have an account? <button className='text-red-700 font-bold hover:underline' onClick={e => showForm('logIn')}>Log in.</button></p>}
                         </div>
                     </div>}
 

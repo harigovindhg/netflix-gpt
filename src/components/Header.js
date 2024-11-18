@@ -7,6 +7,7 @@ import { auth } from '../utils/firebase';
 import { loginUser, logoutUser } from '../utils/slices/loginSlice';
 import { toggleGPTSearchBar } from '../utils/slices/gptSlice';
 import { NETFLIX_LOGO, USER_AVATAR } from '../utils/constants';
+import celluloidLogo from './common/assets/images/celluloid.png';
 import AIButton from './AIButton';
 
 const Header = () => {
@@ -190,7 +191,7 @@ const Header = () => {
             <div className={`${loginStatus === null ? 'md:justify-center' : 'md:justify-between'} justify-center w-full h-auto flex fixed top-0 z-30 ${opaqueHeader ? 'sticky-header-blur px-[2%] pt-[1%] pb-0' : 'p-[2%] bg-gradient-to-b from-[#0000009e]'} transition-all ease-in-out duration-250`}>
                 <div data-layout="item" className="w-auto">
                     <a data-uia="" href={loginStatus !== null ? '/browse' : '/'}>
-                        <img className={`w-[12rem] ${opaqueHeader ? 'opacity-60 hover:opacity-100' : 'opacity-100'} transition-all ease-in-out duration-500 fill-current block`} src={NETFLIX_LOGO} alt="Netflix Logo" />
+                        <img className={`w-[14rem] opacity-100 transition-all ease-in-out duration-500 fill-current block`} src={celluloidLogo} alt="Celluloid Logo" />
                     </a>
                 </div>
                 {loginStatus !== null &&

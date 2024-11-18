@@ -1,6 +1,6 @@
 
 ## About
-Netflix GPT project built on React with Redux stores, Tailwind CSS, Firebase Authentication, TMDB for data, Open AI GPT for Movie/TV Show Suggestions, Vercel for deployment
+Celluloid project built on React with Redux stores, Tailwind CSS, Firebase Authentication, TMDB for data, Open AI GPT for Movie/TV Show Suggestions, Vercel for deployment
 ## Features
 - React
 - Redux stores and slices
