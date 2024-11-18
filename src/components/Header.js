@@ -188,14 +188,14 @@ const Header = () => {
 
     return (
         <>
-            <div className={`${loginStatus === null ? 'md:justify-center' : 'md:justify-between'} justify-center w-full h-auto flex fixed top-0 z-30 ${opaqueHeader ? 'sticky-header-blur px-[2%] pt-[1%] pb-0' : 'p-[2%] bg-gradient-to-b from-[#0000009e]'} transition-all ease-in-out duration-250`}>
+            <div className={`${loginStatus === null ? 'md:justify-center' : 'md:justify-between'} items-end justify-between w-full h-auto flex fixed top-0 z-30 ${opaqueHeader ? 'sticky-header-blur px-[2%] pt-[1%] pb-0' : 'p-[2%] bg-gradient-to-b from-[#0000009e]'} transition-all ease-in-out duration-250`}>
                 <div data-layout="item" className="w-auto">
                     <a data-uia="" href={loginStatus !== null ? '/browse' : '/'}>
                         <img className={`w-[14rem] opacity-100 transition-all ease-in-out duration-500 fill-current block`} src={celluloidLogo} alt="Celluloid Logo" />
                     </a>
                 </div>
                 {loginStatus !== null &&
-                    <div className='w-fit flex flex-row items-center'>
+                    <div className='w-fit flex flex-row items-center mr-3'>
                         <div className="items-center flex w-fit">
                             <AIButton handleGPTSearchToggle={handleGPTSearchToggle} text={'Smart Search'} />
                         </div>

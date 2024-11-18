@@ -20,7 +20,7 @@ const GPTSearch = () => {
     return (
         showGPTSearchBar ?
             <div className={`text-white ${moviesSearchResult || tvShowsSearchResult ? 'absolute !h-max md:!h-[215%]' : 'fixed h-[215%]'} top-0 w-full search-gpt-overlay z-20`}>
-                <div className={`flex flex-row w-full justify-center ${moviesSearchResult || tvShowsSearchResult ? 'mt-[50%] md:mt-[10%]' : 'mt-[50%] md:mt-[20%]'}`}>
+                <div className={`flex flex-row w-full mb-[10%] justify-center ${moviesSearchResult || tvShowsSearchResult ? 'mt-[50%] md:mt-[10%]' : 'mt-[50%] md:mt-[20%]'}`}>
                     <GPTSearchBar />
                 </div>
                 {fetchResultsStatus !== 'idle' && fetchResultsStatus !== 'loading' ? <div className='text-center my-5 flex content-center justify-center'>
