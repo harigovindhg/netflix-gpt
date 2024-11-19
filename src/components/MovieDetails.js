@@ -25,8 +25,8 @@ const MovieDetails = () => {
     return (
         <div className='flex flex-col w-full h-full content-center flex-wrap md:mt-[8%] mt-[20%] text-white bg-opacity-5'>
             <div className='ml-[2%]'>
-                <button className='flex w-[5%] items-center flex-row text-2xl opacity-60 hover:opacity-100 transition-all ease-in-out duration-200 font-sans font-bold cursor-pointer' onClick={(e) => redirectBack(e)}>
-                    <div>{backSVGChevron()}</div>
+                <button className='flex items-center flex-row text-2xl opacity-60 hover:opacity-100 transition-all ease-in-out duration-200 font-sans font-bold cursor-pointer' onClick={(e) => redirectBack(e)}>
+                    <div className='w-8'>{backSVGChevron()}</div>
                     <h1>{'Back'}</h1>
                 </button>
             </div>
@@ -76,7 +76,7 @@ const MovieDetails = () => {
                         ))
                     }
                 </div>
-                <div className='md:w-1/2 w-full text-xl text-center'>{overview}</div>
+                <div className='md:w-1/2 mb-10 w-full text-xl text-center'>{overview}</div>
                 {isTVShow === "true" &&
                     <>
                         {/* <div className='w-[75%] border-b-2 border-white mt-[1%]' /> */}

@@ -104,16 +104,16 @@ const LoginForm = () => {
             <div onMouseMove={event => handleOnMouseMove(event)} className={`${showModal === 'default' ? 'w-[40rem]' : 'w-96'} ease-in-out duration-200 flex justify-center h-[70%] bg-[rgba(255,255,255,0.15)] rounded-xl text-white relative before:bg-radialglow before:rounded-xl before:content-[""] before:h-full before:left-0 before:w-full before:z-[3] before:absolute before:opacity-0 before:transition-opacity before:duration-500  hover:before:opacity-100 after:bg-radialglowAfter after:rounded-xl after:content-[""] after:h-full after:left-0 after:w-full after:z-[1] after:absolute after:opacity-0 after:transition-opacity after:duration-500 hover:after:opacity-100 before:pointer-events-none after:pointer-events-none`}>
                 <div className='bg-[rgb(15,15,15)] rounded-xl m-[1px] flex flex-col relative flex-grow-[1] h-[calc(100%-2px)] w-[calc(100%-2px)] z-[2]'>
                     {showModal === 'default' && <div className={`flex flex-col animate-fadeInSmooth`}>
-                        <h1 className='font-bold text-center text-5xl flex self-center pt-[10%]'>Welcome User!</h1>
-                        <div className='flex flex-row px-[15%] pb-[20%] pt-[10%] justify-center'>
+                        <h1 className='font-bold text-center text-5xl flex self-center pt-[10%]'>Welcome!</h1>
+                        <div className='flex flex-row px-[5%] md:px-[15%] pb-[20%] pt-[10%] justify-center'>
                             <div className='flex flex-col justify-center text-center'>
                                 <label>Existing User?</label>
                                 <button className='text-[rgba(255,255,255)] font-bold text-3xl rounded-sm hover:text-[rgba(255,255,255,0.75)] hover:underline ease-in-out duration-300' onClick={e => showForm('logIn')}>Sign In</button>
                             </div>
-                            <div className='border-l-2 border-gray-300 border-solid mx-16 h-40' />
+                            <div className='border-l-2 border-gray-300 border-solid mx-12 md:mx-16 h-40' />
                             <div className='flex flex-col justify-center text-center'>
                                 <label>New User?</label>
-                                <button className='text-red-700 rounded-sm font-bold text-3xl hover:text-red-600 hover:underline ease-in-out duration-300' onClick={e => showForm('signUp')}>Sign Up</button>
+                                <button className='text-[#CC9900] rounded-sm font-bold text-3xl hover:text-[#CC9900] hover:underline ease-in-out duration-300' onClick={e => showForm('signUp')}>Sign Up</button>
                             </div>
                         </div>
                     </div>}
@@ -169,10 +169,10 @@ const LoginForm = () => {
                             }
                             {loginErrorMessage !== '' && <p className='text-red-500 italic font-bold'>{loginErrorMessage}</p>}
                             {/* <button className='p-4 mt-4 bg-red-700 rounded-[0.1875rem] hover:bg-red-600 ease-in-out duration-300' onClick={(e) => handleSubmit(e)}>{isLoading ? <div className="block relative w-[50px] h-[50px] "><div className='absolute border-4 border-solid border-white opacity-100 rounded-[50%] animate-rippleSpinner'></div><div className='absolute border-4 border-solid border-white opacity-100 rounded-[50%] animate-rippleSpinner animate-delay'></div></div> : `${showModal === 'logIn' ? 'Sign In' : 'Sign Up'}`}</button> */}
-                            {isLoading ? <div className='mt-4 flex justify-center overflow-hidden bg-red-700 rounded-[0.1875rem]'><div className="inline-block relative w-[50px] h-[50px]"><div className='absolute border-4 border-solid border-white opacity-100 rounded-[50%] animate-rippleSpinner'></div><div className='absolute border-4 border-solid border-white opacity-100 rounded-[50%] animate-rippleSpinner'></div></div></div> : <button className='mt-4 h-[50px] bg-red-700 rounded-[0.1875rem] hover:bg-red-600 ease-in-out duration-300' onClick={(e) => handleSubmit(e)}>{`${showModal === 'logIn' ? 'Sign In' : 'Sign Up'}`}</button>}
+                            {isLoading ? <div className='mt-4 flex justify-center overflow-hidden bg-[#663300] rounded-[0.1875rem]'><div className="inline-block relative w-[50px] h-[50px]"><div className='absolute border-4 border-solid border-white opacity-100 rounded-[50%] animate-rippleSpinner'></div><div className='absolute border-4 border-solid border-white opacity-100 rounded-[50%] animate-rippleSpinner'></div></div></div> : <button className='mt-4 h-[50px] bg-[#663300] rounded-[0.1875rem] hover:bg-[#CC9900] ease-in-out duration-300' onClick={(e) => handleSubmit(e)}>{`${showModal === 'logIn' ? 'Sign In' : 'Sign Up'}`}</button>}
                         </form>
                         <div className='pb-[15%] px-[15%]'>
-                            {showModal === 'logIn' ? <p>New to Celluloid? <button className='text-red-700 font-bold hover:underline' onClick={e => showForm('signUp')}>Sign up now.</button></p> : <p>Already have an account? <button className='text-red-700 font-bold hover:underline' onClick={e => showForm('logIn')}>Log in.</button></p>}
+                            {showModal === 'logIn' ? <p>New to Celluloid? <button className='text-[#CC9900] font-bold hover:underline' onClick={e => showForm('signUp')}>Sign up now.</button></p> : <p>Already have an account? <button className='text-[#CC9900] font-bold hover:underline' onClick={e => showForm('logIn')}>Log in.</button></p>}
                         </div>
                     </div>}
 

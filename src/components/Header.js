@@ -6,7 +6,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../utils/firebase';
 import { loginUser, logoutUser } from '../utils/slices/loginSlice';
 import { toggleGPTSearchBar } from '../utils/slices/gptSlice';
-import { NETFLIX_LOGO, USER_AVATAR } from '../utils/constants';
+import { USER_AVATAR } from '../utils/constants';
 import celluloidLogo from './common/assets/images/celluloid.png';
 import AIButton from './AIButton';
 
@@ -65,18 +65,18 @@ const Header = () => {
     }
 
     const bindFloatingButtonControls = () => {
-        headerButton = document.getElementById('headerButton');
+        // headerButton = document.getElementById('headerButton');
         floatingButton = document.getElementById('floatingButton');
-        removeZone = document.getElementById('removeZone');
-        removeText = document.getElementById('removeText');
+        // removeZone = document.getElementById('removeZone');
+        // removeText = document.getElementById('removeText');
 
-        floatingButton.addEventListener('mousedown', startDragging);
-        document.addEventListener('mousemove', drag);
-        document.addEventListener('mouseup', stopDragging);
+        // floatingButton.addEventListener('mousedown', startDragging);
+        // document.addEventListener('mousemove', drag);
+        // document.addEventListener('mouseup', stopDragging);
 
-        floatingButton.addEventListener('touchstart', startDragging);
-        document.addEventListener('touchmove', drag);
-        document.addEventListener('touchend', stopDragging);
+        // floatingButton.addEventListener('touchstart', startDragging);
+        // document.addEventListener('touchmove', drag);
+        // document.addEventListener('touchend', stopDragging);
 
         window.addEventListener('scroll', () => handleScroll(floatingButton));
     }
@@ -188,7 +188,7 @@ const Header = () => {
 
     return (
         <>
-            <div className={`${loginStatus === null ? 'md:justify-center' : 'md:justify-between'} items-end justify-between w-full h-auto flex fixed top-0 z-30 ${opaqueHeader ? 'sticky-header-blur px-[2%] pt-[1%] pb-0' : 'p-[2%] bg-gradient-to-b from-[#0000009e]'} transition-all ease-in-out duration-250`}>
+            <div className={`${loginStatus === null ? 'justify-center' : 'justify-between md:justify-between'} items-end w-full h-auto flex fixed top-0 z-30 ${opaqueHeader ? 'sticky-header-blur px-[2%] pt-[1%] pb-0' : 'p-[2%] bg-gradient-to-b from-[#0000009e]'} transition-all ease-in-out duration-250`}>
                 <div data-layout="item" className="w-auto">
                     <a data-uia="" href={loginStatus !== null ? '/browse' : '/'}>
                         <img className={`w-[14rem] opacity-100 transition-all ease-in-out duration-500 fill-current block`} src={celluloidLogo} alt="Celluloid Logo" />
@@ -218,7 +218,7 @@ const Header = () => {
                     </div>
                 }
             </div>
-            <button id="floatingButton" className="fixed opacity-0 z-50 w-20 h-20 blur-overlay text-white border-none rounded-full select-none flex items-center justify-center text-2xl shadow-md transition-all duration-300 ease-in-out pointer-events-auto" onClick={e => handleGPTSearchToggle(e)} onKeyDown={handleGPTSearchToggle}>
+            <button id="floatingButton" className="fixed opacity-0 z-50 w-16 h-16 md:w-20 md:h-20 blur-overlay text-white border-none rounded-full select-none flex items-center justify-center text-2xl shadow-md transition-all duration-300 ease-in-out pointer-events-auto" onClick={e => handleGPTSearchToggle(e)} onKeyDown={handleGPTSearchToggle}>
                 <svg className="overflow-visible [--scale-x:1.4] [--scale-y:1.4]" data-testid="geist-icon" height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
                     <path className="origin-center [transform-box:fill-box] motion-safe:animate-[scale_1.5s_0.15s_infinite]" d="M2.5 0.5V0H3.5V0.5C3.5 1.60457 4.39543 2.5 5.5 2.5H6V3V3.5H5.5C4.39543 3.5 3.5 4.39543 3.5 5.5V6H3H2.5V5.5C2.5 4.39543 1.60457 3.5 0.5 3.5H0V3V2.5H0.5C1.60457 2.5 2.5 1.60457 2.5 0.5Z" fill="#ffff"></path>
                     <path className="origin-center [transform-box:fill-box] motion-safe:animate-[scale_1.5s_0.3s_infinite]" d="M14.5 4.5V5H13.5V4.5C13.5 3.94772 13.0523 3.5 12.5 3.5H12V3V2.5H12.5C13.0523 2.5 13.5 2.05228 13.5 1.5V1H14H14.5V1.5C14.5 2.05228 14.9477 2.5 15.5 2.5H16V3V3.5H15.5C14.9477 3.5 14.5 3.94772 14.5 4.5Z" fill="#ffff"></path>
