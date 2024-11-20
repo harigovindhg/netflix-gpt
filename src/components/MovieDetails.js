@@ -5,6 +5,7 @@ import useMovieDetails from '../hooks/useMovieDetails';
 import useVideoBg from '../hooks/useVideoBg';
 import { IMAGE_CDN, IMAGE_CDN_LQ } from '../utils/constants';
 import backSVGChevron from './common/assets/images/backSVGChevron';
+import playIcon from './common/assets/images/play.png';
 
 const MovieDetails = () => {
     const { movieId, isTVShow } = useParams();
@@ -40,7 +41,10 @@ const MovieDetails = () => {
                                 <a className="z-10 leading-none text-white whitespace-no-wrap w-full" href={`https://www.youtube.com/watch?v=${movieDetailsTrailer?.key}`} target='_blank'>
                                     <div className={`relative blurred-box animate-fadeInSmooth ease-in-out duration-500 rounded-lg text-center content-center bg-gray-300 text-white`}>
                                         <div className='border-black border-solid border-2 animate-fadeInSmooth ease-in-out duration-500 hover:border-gray-200 m-[2px] rounded-md'>
-                                            <div className='p-4 text-white'>{'▶ Watch Trailer'}</div>
+                                            <div className='p-4 text-white flex items-center justify-center'>
+                                                <img className='w-7' src={playIcon} aria-hidden />
+                                                <h2 className='mx-2 text-xl'>{'Watch Trailer'}</h2>
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
@@ -49,7 +53,7 @@ const MovieDetails = () => {
                                 <a className="z-10 leading-none text-white whitespace-no-wrap w-full" href={homepage}>
                                     <div className={`relative blurred-box animate-fadeInSmooth ease-in-out duration-500 rounded-lg text-center content-center bg-gray-300 text-white`}>
                                         <div className='border-black border-solid border-2 animate-fadeInSmooth ease-in-out duration-500 hover:border-gray-200 m-[2px] rounded-md'>
-                                            <div className='p-4 text-white'>{`Visit Page`}</div>
+                                            <div className='p-4 text-white text-xl'>{`Visit Page`}</div>
                                         </div>
                                     </div>
                                 </a>
