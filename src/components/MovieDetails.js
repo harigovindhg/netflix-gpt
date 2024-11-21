@@ -74,11 +74,37 @@ const MovieDetails = () => {
                     </div>
                 </div>
                 <div className='w-full flex flex-col md:flex-row text-xl text-center justify-center items-center'>
-                    {
-                        genres?.map((genre) => (
-                            <div className='text-xl block p-4 m-4 relative w-fit rounded-2xl bg-gray-800' key={genre.id}>{genre.name}</div>
-                        ))
-                    }
+                    <div className="resizable justify-items-center" data-translate="items" data-direction="horizontal" data-blurring="true" data-outline="false" data-play-state="running" data-spill="false" style={{ '--speed': 20, '--count': genres.length, '--scale': 1, '--blur': 1, '--blurs': 8 }}>
+                        <div className="container">
+                            <div className="blurIcon blurIcon--left">
+                                <div style={{ '--index': 0 }}></div>
+                                <div style={{ '--index': 1 }}></div>
+                                <div style={{ '--index': 2 }}></div>
+                                <div style={{ '--index': 3 }}></div>
+                                <div style={{ '--index': 4 }}></div>
+                                <div style={{ '--index': 5 }}></div>
+                                <div style={{ '--index': 6 }}></div>
+                                <div style={{ '--index': 7 }}></div>
+                            </div>
+                            <ul className='justify-self-center'>
+                                {
+                                    genres?.map((genre, index) => (
+                                        <li style={{ '--index': index }}><div className='text-xl block p-4 m-4 w-fit rounded-2xl' key={genre.id}>{genre.name}</div></li>
+                                    ))
+                                }
+                            </ul>
+                            <div className="blurIcon blurIcon--right">
+                                <div style={{ '--index': 1 }}></div>
+                                <div style={{ '--index': 2 }}></div>
+                                <div style={{ '--index': 3 }}></div>
+                                <div style={{ '--index': 4 }}></div>
+                                <div style={{ '--index': 5 }}></div>
+                                <div style={{ '--index': 6 }}></div>
+                                <div style={{ '--index': 7 }}></div>
+                                <div style={{ '--index': 8 }}></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className='md:w-1/2 mb-10 w-full text-xl text-center'>{overview}</div>
                 {isTVShow === "true" &&
