@@ -19,7 +19,7 @@ const MovieDetails = () => {
     const redirectBack = (e) => {
         navigate('/browse');
     }
-    const { original_title, vote_average, vote_count, poster_path, backdrop_path, original_name, overview, tagline, homepage, genres, networks, first_air_date } = movieData;
+    const { name, vote_average, vote_count, poster_path, backdrop_path, original_name, overview, tagline, homepage, genres, networks, first_air_date } = movieData;
     const airYear = first_air_date?.split('-')[0];
     const modifiedVote = Math.round(vote_average * 100) / 100;
     const modifiedVoteCount = vote_count / 1000 > 1 ? `${(Math.round((vote_count / 1000) * 100) / 100)} k` : vote_count;
@@ -32,7 +32,7 @@ const MovieDetails = () => {
                 </button>
             </div>
             <div className='flex flex-col items-center justify-center w-full'>
-                <h1 className='text-6xl font-sans font-bold text-center text-white my-4'>{original_title ? original_title : original_name}{isTVShow === "true" && ` (${airYear})`}</h1>
+                <h1 className='text-6xl font-sans font-bold text-center text-white my-4'>{name ? name : original_name}{isTVShow === "true" && ` (${airYear})`}</h1>
                 {tagline && <div className='w-full text-center text-2xl text-gray-400 italic'>{`"${tagline}"`}</div>}
                 <div className={`w-[330px] h-[495px] rounded-md`} style={{ backgroundImage: `url(${IMAGE_CDN}${poster_path ? poster_path : backdrop_path})`, backgroundSize: 'cover' }}>
                     <div className='text-white p-4 h-full blurred-sub-box group flex flex-col items-center'>

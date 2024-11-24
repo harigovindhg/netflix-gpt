@@ -188,8 +188,8 @@ const Header = () => {
 
     return (
         <>
-            <div className={`${loginStatus === null ? 'justify-center' : 'justify-between md:justify-between'} items-end w-full h-auto flex fixed top-0 z-30 ${opaqueHeader ? 'sticky-header-blur px-[2%] pt-[1%] pb-0' : 'p-[2%] bg-gradient-to-b from-[#0000009e]'} transition-all ease-in-out duration-250`}>
-                <div data-layout="item" className="w-auto">
+            <div className={`${loginStatus === null ? 'justify-center' : 'justify-between md:justify-between'} w-full h-auto flex fixed top-0 z-30 ${opaqueHeader ? 'sticky-header-blur px-[2%] py-[1%]' : 'p-[2%] bg-gradient-to-b from-[#0000009e]'} transition-all ease-in-out duration-250`}>
+                <div data-layout="item" className="w-auto flex items-center">
                     <a data-uia="" href={loginStatus !== null ? '/browse' : '/'}>
                         <img className={`w-[14rem] opacity-100 transition-all ease-in-out duration-500 fill-current block`} src={celluloidLogo} alt="Celluloid Logo" />
                     </a>
@@ -201,14 +201,14 @@ const Header = () => {
                         </div>
                         <div data-layout="item" className="w-fit text-center flex md:flex-col flex-row flex-wrap relative items-center group" >
                             <div className='flex flex-row items-center' tabIndex={0} onKeyDown={showSignOutTooltip} onClick={e => showSignOutTooltip(e)}>
-                                <img className="w-12 rounded-md block" src={USER_AVATAR} alt="User Avatar" />
-                                <span className={`hidden md:block border-t-white border-l-transparent border-r-transparent border-b-transparent border-solid border-t-4 border-r-4 border-b-0 border-l-4 ml-3 group-hover:rotate-180 ${showTooltip && 'rotate-180'}`} role="presentation"></span>
+                                <img className="w-14 rounded-md block border-black border-solid border-2 animate-fadeInSmooth ease-in-out duration-500 hover:border-gray-200 m-[2px]" src={USER_AVATAR} alt="User Avatar" />
+                                {/* <span className={`hidden md:block border-t-white border-l-transparent border-r-transparent border-b-transparent border-solid border-t-4 border-r-4 border-b-0 border-l-4 ml-3 group-hover:rotate-180 ${showTooltip && 'rotate-180'}`} role="presentation"></span> */}
                             </div>
                             {showTooltip &&
-                                <div className="absolute top-8 -left-8 md:top-8 md:left-auto flex-col items-center mt-6 flex w-max">
-                                    <span className="relative z-10 leading-none text-white whitespace-no-wrap ">
-                                        <div className={`relative animate-fadeInSmooth ease-in-out duration-500 rounded-lg text-center content-center hover:bg-gray-600 bg-gray-300 hover:text-white text-gray-800`}>
-                                            <div className='border-gray-800 border-solid border-2 hover:border-gray-400 m-[2px] rounded-md'>
+                                <div className="absolute top-8 -left-8 md:top-8 md:left-auto flex-col items-center mt-8 flex w-max">
+                                    <span className="relative z-10 leading-none text-white whitespace-no-wrap bg-black rounded-lg">
+                                        <div className={`relative animate-fadeInSmooth ease-in-out duration-500 rounded-lg text-center content-center blurred-box`}>
+                                            <div className='animate-fadeInSmooth group/ai ease-in-out duration-500 text-center content-center border-black border-solid border-2 hover:border-gray-200 m-[2px] rounded-md'>
                                                 <button tabIndex={0} className='p-4' onClick={e => handleSignOut(e)}>{'Sign Out'}</button>
                                             </div>
                                         </div>
