@@ -9,7 +9,7 @@ const MovieCard = ({ data, isTVShow, gptSearchList }) => {
     const dispatch = useDispatch();
 
     if (!data) return;
-    const { original_title, vote_average, vote_count, poster_path, backdrop_path, original_name, overview } = data;
+    const { name, original_title, vote_average, vote_count, poster_path, backdrop_path, overview } = data;
     const modifiedVote = Math.round(vote_average * 100) / 100;
     const modifiedVoteCount = vote_count / 1000 > 1 ? `${(Math.round((vote_count / 1000) * 100) / 100)} k` : vote_count;
 
@@ -23,8 +23,8 @@ const MovieCard = ({ data, isTVShow, gptSearchList }) => {
             {/* <div className='text-white bg-gradient-to-b p-4 from-black h-full blurred-sub-box group flex flex-col justify-between'> */}
             <div className='text-white p-4 h-full blurred-sub-box group flex flex-col justify-between'>
                 {/* <h1 className='h-[100px] text-xl font-sans font-bold group-hover:text-3xl transition-all ease-in-out duration-150'>{original_title ? original_title : original_name}</h1> */}
-                <h1 className='w-full text-xl font-sans font-bold transition-all ease-in-out duration-150'>{original_title ? original_title : original_name}</h1>
-                <div className=' w-full opacity-0 group-hover:opacity-100 transition-all ease-in duration-500 wrappedOverview'>{overview}</div>
+                <h1 className='w-full text-xl font-sans font-bold transition-all ease-in-out duration-150'>{name ? name : original_title}</h1>
+                <div className=' w-full opacity-0 group-hover:opacity-100 transition-all ease-in duration-200 wrappedOverview'>{overview}</div>
                 <span className='w-full font-bold transition-all ease-in-out duration-150 flex flex-row italic items-center'>
                     {vote_count > 0 ?
                         <div className='flex flex-col w-1/2'>

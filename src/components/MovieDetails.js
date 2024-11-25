@@ -19,7 +19,7 @@ const MovieDetails = () => {
     const redirectBack = (e) => {
         navigate('/browse');
     }
-    const { name, vote_average, vote_count, poster_path, backdrop_path, original_name, overview, tagline, homepage, genres, networks, first_air_date } = movieData;
+    const { name, vote_average, vote_count, poster_path, backdrop_path, original_title, overview, tagline, homepage, genres, networks, first_air_date } = movieData;
     const airYear = first_air_date?.split('-')[0];
     const modifiedVote = Math.round(vote_average * 100) / 100;
     const modifiedVoteCount = vote_count / 1000 > 1 ? `${(Math.round((vote_count / 1000) * 100) / 100)} k` : vote_count;
@@ -32,12 +32,12 @@ const MovieDetails = () => {
                 </button>
             </div>
             <div className='flex flex-col items-center justify-center w-full'>
-                <h1 className='text-6xl font-sans font-bold text-center text-white my-4'>{name ? name : original_name}{isTVShow === "true" && ` (${airYear})`}</h1>
+                <h1 className='text-6xl font-sans font-bold text-center text-white my-4'>{name ? name : original_title}{isTVShow === "true" && ` (${airYear})`}</h1>
                 {tagline && <div className='w-full text-center text-2xl text-gray-400 italic'>{`"${tagline}"`}</div>}
                 <div className={`w-[330px] h-[495px] rounded-md`} style={{ backgroundImage: `url(${IMAGE_CDN}${poster_path ? poster_path : backdrop_path})`, backgroundSize: 'cover' }}>
                     <div className='text-white p-4 h-full blurred-sub-box group flex flex-col items-center'>
                         <div className='flex flex-col w-full justify-around items-center'>
-                            <div className="items-center flex w-1/2 mt-[40%] opacity-0 group-hover:opacity-100">
+                            <div className="items-center flex w-1/2 mt-[40%] opacity-0 duration-500 group-hover:opacity-100">
                                 <a className="z-10 leading-none text-white whitespace-no-wrap w-full" href={`https://www.youtube.com/watch?v=${movieDetailsTrailer?.key}`} target='_blank'>
                                     <div className={`relative blurred-box animate-fadeInSmooth ease-in-out duration-500 rounded-lg text-center content-center bg-gray-300 text-white`}>
                                         <div className='border-black border-solid border-2 animate-fadeInSmooth ease-in-out duration-500 hover:border-gray-200 m-[2px] rounded-md'>
@@ -49,7 +49,7 @@ const MovieDetails = () => {
                                     </div>
                                 </a>
                             </div>
-                            <div className="items-center flex w-1/2 mt-[20%] mb-[40%] opacity-0 group-hover:opacity-100">
+                            <div className="items-center flex w-1/2 mt-[20%] mb-[40%] opacity-0 duration-500 group-hover:opacity-100">
                                 <a className="z-10 leading-none text-white whitespace-no-wrap w-full" href={homepage}>
                                     <div className={`relative blurred-box animate-fadeInSmooth ease-in-out duration-500 rounded-lg text-center content-center bg-gray-300 text-white`}>
                                         <div className='border-black border-solid border-2 animate-fadeInSmooth ease-in-out duration-500 hover:border-gray-200 m-[2px] rounded-md'>
@@ -77,31 +77,31 @@ const MovieDetails = () => {
                     <div className="resizable justify-items-center" data-translate="items" data-direction="horizontal" data-blurring="true" data-outline="false" data-play-state="running" data-spill="false" style={{ '--speed': 20, '--count': genres.length, '--scale': 1, '--blur': 1, '--blurs': 8 }}>
                         <div className="container">
                             <div className="blurIcon blurIcon--left">
-                                <div style={{ '--index': 0 }}></div>
-                                <div style={{ '--index': 1 }}></div>
-                                <div style={{ '--index': 2 }}></div>
-                                <div style={{ '--index': 3 }}></div>
-                                <div style={{ '--index': 4 }}></div>
-                                <div style={{ '--index': 5 }}></div>
-                                <div style={{ '--index': 6 }}></div>
-                                <div style={{ '--index': 7 }}></div>
+                                <div key="glowblur-1-left" style={{ '--index': 0 }}></div>
+                                <div key="glowblur-2-left" style={{ '--index': 1 }}></div>
+                                <div key="glowblur-3-left" style={{ '--index': 2 }}></div>
+                                <div key="glowblur-4-left" style={{ '--index': 3 }}></div>
+                                <div key="glowblur-5-left" style={{ '--index': 4 }}></div>
+                                <div key="glowblur-6-left" style={{ '--index': 5 }}></div>
+                                <div key="glowblur-7-left" style={{ '--index': 6 }}></div>
+                                <div key="glowblur-8-left" style={{ '--index': 7 }}></div>
                             </div>
                             <ul className='justify-self-center'>
                                 {
                                     genres?.map((genre, index) => (
-                                        <li style={{ '--index': index }}><div className='text-xl block p-4 m-4 w-fit rounded-2xl' key={genre.id}>{genre.name}</div></li>
+                                        <li key={genre.id} style={{ '--index': index }}><div className='text-xl block p-4 m-4 w-fit rounded-2xl'>{genre.name}</div></li>
                                     ))
                                 }
                             </ul>
                             <div className="blurIcon blurIcon--right">
-                                <div style={{ '--index': 1 }}></div>
-                                <div style={{ '--index': 2 }}></div>
-                                <div style={{ '--index': 3 }}></div>
-                                <div style={{ '--index': 4 }}></div>
-                                <div style={{ '--index': 5 }}></div>
-                                <div style={{ '--index': 6 }}></div>
-                                <div style={{ '--index': 7 }}></div>
-                                <div style={{ '--index': 8 }}></div>
+                                <div key="glowblur-1-right" style={{ '--index': 1 }}></div>
+                                <div key="glowblur-2-right" style={{ '--index': 2 }}></div>
+                                <div key="glowblur-3-right" style={{ '--index': 3 }}></div>
+                                <div key="glowblur-4-right" style={{ '--index': 4 }}></div>
+                                <div key="glowblur-5-right" style={{ '--index': 5 }}></div>
+                                <div key="glowblur-6-right" style={{ '--index': 6 }}></div>
+                                <div key="glowblur-7-right" style={{ '--index': 7 }}></div>
+                                <div key="glowblur-8-right" style={{ '--index': 8 }}></div>
                             </div>
                         </div>
                     </div>

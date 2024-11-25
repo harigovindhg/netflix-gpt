@@ -19,7 +19,8 @@ const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     let isDragging = false;
-    let headerButton, floatingButton, removeZone, removeText, startX, startY, initialX, initialY;
+    let floatingButton;
+    // let headerButton, floatingButton, removeZone, removeText, startX, startY, initialX, initialY;
     let isFloating = false;
 
     useEffect(() => {
@@ -99,72 +100,72 @@ const Header = () => {
         }
     }
 
-    function startDragging(e) {
-        isDragging = true;
-        if (e.type === 'touchstart') {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-        } else {
-            startX = e.clientX;
-            startY = e.clientY;
-        }
-        initialX = floatingButton.offsetLeft;
-        initialY = floatingButton.offsetTop;
-    }
+    // function startDragging(e) {
+    //     isDragging = true;
+    //     if (e.type === 'touchstart') {
+    //         startX = e.touches[0].clientX;
+    //         startY = e.touches[0].clientY;
+    //     } else {
+    //         startX = e.clientX;
+    //         startY = e.clientY;
+    //     }
+    //     initialX = floatingButton.offsetLeft;
+    //     initialY = floatingButton.offsetTop;
+    // }
 
-    function drag(e) {
-        if (isDragging) {
-            e.preventDefault();
-            let currentX, currentY;
-            if (e.type === 'touchmove') {
-                currentX = e.touches[0].clientX;
-                currentY = e.touches[0].clientY;
-            } else {
-                currentX = e.clientX;
-                currentY = e.clientY;
-            }
-            const deltaX = currentX - startX;
-            const deltaY = currentY - startY;
+    // function drag(e) {
+    //     if (isDragging) {
+    //         e.preventDefault();
+    //         let currentX, currentY;
+    //         if (e.type === 'touchmove') {
+    //             currentX = e.touches[0].clientX;
+    //             currentY = e.touches[0].clientY;
+    //         } else {
+    //             currentX = e.clientX;
+    //             currentY = e.clientY;
+    //         }
+    //         const deltaX = currentX - startX;
+    //         const deltaY = currentY - startY;
 
-            floatingButton.style.left = `${initialX + deltaX}px`;
-            floatingButton.style.top = `${initialY + deltaY}px`;
+    //         floatingButton.style.left = `${initialX + deltaX}px`;
+    //         floatingButton.style.top = `${initialY + deltaY}px`;
 
-            // Show remove zone when dragging near bottom
-            const removeThreshold = window.innerHeight * 0.8;
-            if (currentY > removeThreshold) {
-                const removeZoneHeight = (currentY - removeThreshold) / (window.innerHeight - removeThreshold);
-                removeZone.style.height = `${removeZoneHeight * 100}%`;
-                removeText.style.opacity = removeZoneHeight;
-            } else {
-                removeZone.style.height = '0';
-                removeText.style.opacity = '0';
-            }
-        }
-    }
+    //         // Show remove zone when dragging near bottom
+    //         const removeThreshold = window.innerHeight * 0.8;
+    //         if (currentY > removeThreshold) {
+    //             const removeZoneHeight = (currentY - removeThreshold) / (window.innerHeight - removeThreshold);
+    //             removeZone.style.height = `${removeZoneHeight * 100}%`;
+    //             removeText.style.opacity = removeZoneHeight;
+    //         } else {
+    //             removeZone.style.height = '0';
+    //             removeText.style.opacity = '0';
+    //         }
+    //     }
+    // }
 
-    function stopDragging(e) {
-        if (isDragging) {
-            const removeTextRect = removeText.getBoundingClientRect();
-            const floatingButtonRect = floatingButton.getBoundingClientRect();
+    // function stopDragging(e) {
+    //     if (isDragging) {
+    //         const removeTextRect = removeText.getBoundingClientRect();
+    //         const floatingButtonRect = floatingButton.getBoundingClientRect();
 
-            // Check if the floating button overlaps with the remove text
-            if (
-                floatingButtonRect.left < removeTextRect.right &&
-                floatingButtonRect.right > removeTextRect.left &&
-                floatingButtonRect.top < removeTextRect.bottom &&
-                floatingButtonRect.bottom > removeTextRect.top
-            ) {
-                floatingButton.remove();
-                isFloating = false;
-            } else {
-                snapToEdge();
-            }
-        }
+    //         // Check if the floating button overlaps with the remove text
+    //         if (
+    //             floatingButtonRect.left < removeTextRect.right &&
+    //             floatingButtonRect.right > removeTextRect.left &&
+    //             floatingButtonRect.top < removeTextRect.bottom &&
+    //             floatingButtonRect.bottom > removeTextRect.top
+    //         ) {
+    //             floatingButton.remove();
+    //             isFloating = false;
+    //         } else {
+    //             snapToEdge();
+    //         }
+    //     }
 
-        isDragging = false;
-        removeZone.style.height = '0';
-        removeText.style.opacity = '0';
-    }
+    //     isDragging = false;
+    //     removeZone.style.height = '0';
+    //     removeText.style.opacity = '0';
+    // }
 
     function snapToEdge() {
         const rect = floatingButton.getBoundingClientRect();
@@ -225,9 +226,9 @@ const Header = () => {
                     <path className="origin-center [transform-box:fill-box] motion-safe:animate-[scale_1.5s_0s_infinite]" d="M8.40706 4.92939L8.5 4H9.5L9.59294 4.92939C9.82973 7.29734 11.7027 9.17027 14.0706 9.40706L15 9.5V10.5L14.0706 10.5929C11.7027 10.8297 9.82973 12.7027 9.59294 15.0706L9.5 16H8.5L8.40706 15.0706C8.17027 12.7027 6.29734 10.8297 3.92939 10.5929L3 10.5V9.5L3.92939 9.40706C6.29734 9.17027 8.17027 7.29734 8.40706 4.92939Z" fill="#ffff"></path>
                 </svg>
             </button>
-            <div id="removeZone" className="fixed bottom-0 left-0 w-full h-0 bg-gradient-to-t from-slate-950 to-transparent flex justify-center items-end text-white text-2xl font-bold transition-all duration-300 ease-in-out pointer-events-none z-40">
+            {/* <div id="removeZone" className="fixed bottom-0 left-0 w-full h-0 bg-gradient-to-t from-slate-950 to-transparent flex justify-center items-end text-white text-2xl font-bold transition-all duration-300 ease-in-out pointer-events-none z-40">
                 <div id="removeText" className="mb-5 opacity-0 transition-opacity duration-300 ease-in-out">Remove</div>
-            </div>
+            </div> */}
         </>
     )
 }
